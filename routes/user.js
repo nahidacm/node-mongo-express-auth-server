@@ -6,6 +6,8 @@ const router = express.Router();
 const User = require("../model/User");
 const auth = require("../middleware/auth");
 
+require('dotenv').config();
+
 /**
  * @method - POST
  * @param - /signup
@@ -65,7 +67,7 @@ router.post(
 
             jwt.sign(
                 payload,
-                "randomString", {
+                process.env.JWT_SECRET, {
                     expiresIn: 10000
                 },
                 (err, token) => {
@@ -123,7 +125,7 @@ router.post(
   
         jwt.sign(
           payload,
-          "randomString",
+          process.env.JWT_SECRET,
           {
             expiresIn: 3600
           },
